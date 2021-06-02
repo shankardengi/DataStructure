@@ -24,6 +24,10 @@ class employee:
     def __str__(self):
         return f"employee name  {self.name} id {self.id} city {self.city}"
 
+    def copy(self):
+        emp = employee(self.name,self.id,self.city)
+        return emp
+
     @staticmethod
     def add_node(emp):
         if employee.start_node == None:
@@ -61,6 +65,7 @@ class employee:
     def display_node():
         count =0
         pointer = employee.start_node
+
         if pointer == None:
             logger.info("List is empty")
         else:
@@ -80,30 +85,64 @@ class employee:
                 logger.info(f"element found and detils are {pointer}")
             else:
                 logger.info("list does not have data")
+    @staticmethod
+    def add_node_beg(node):
+        node.next_node = employee.start_node
+        employee.start_node = node
+        logger.info("node inserted at beganing")
+    @staticmethod
+    def reverse_list():
+        cur = employee.start_node
+        start_reverse_list = None
+        if cur == None:
+            logger.info("List is empty")
+        else:
+            while cur != None:
+                #import pdb;pdb.set_trace()
+                node = cur.copy()
+                if start_reverse_list == None:
+                    node.next_node = None
+                    start_reverse_list = node
+                else:
+                    node.next_node = start_reverse_list
+                    start_reverse_list = node
+                cur = cur.next_node
+        employee.start_node = start_reverse_list
+        logger.info("list reversed")
 
 
 if __name__ == "__main__":
     while True:
-        print("1)add node")
-        print("2)delete node")
-        print("3)find node")
-        print("4)display node")
-        print("5)Exit")
+        print("1)add node at end")
+        print("2)add node at begning")
+        print("3)delete node")
+        print("4)find node")
+        print("5)display node")
+        print("6)Reverse list")
+        print("7)Exit")
         ch = int(input("Enter Choice:"))
         if ch == 1:
             name = input("Enter name:")
             id = input("Enter id:")
             city = input("Enter city")
             employee.add_node(employee(name,id,city))
-        elif ch==2:
+        elif ch == 2:
+            name = input("Enter name:")
+            id = input("Enter id:")
+            city = input("Enter city")
+            employee.add_node_beg(employee(name,id,city))
+        elif ch == 3:
             id = input("Enter id to delete")
             employee.delete_node(id)
-        elif ch == 3:
+        elif ch == 4:
             id = input("Enter id to search Node")
             employee.find(id)
-        elif ch == 4:
-            employee.display_node()
         elif ch == 5:
+            employee.display_node()
+        elif ch == 6:
+            logger.info("inside reverse")
+            employee.reverse_list()
+        elif ch == 7:
             break
 
 
