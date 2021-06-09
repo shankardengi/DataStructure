@@ -17,7 +17,6 @@ class Node:
         return first
     @staticmethod
     def reverse_list(first):
-        #import pdb;pdb.set_trace()
         if first == None:
             print("list is empty")
         else:
@@ -67,7 +66,6 @@ class Node:
                 cur2 = cur2.next
             else:
                 data = carry
-            import pdb;pdb.set_trace()
             carry = data // 10
             cur3 = Node(data % 10)
             cur3.next = third
@@ -76,21 +74,17 @@ class Node:
         return third
 
 if __name__ == "__main__":
-    list1 = input("Enter phone nuber to add:")
+    list1 = input("Enter 1st phone nuber to add:")
     first_list = Node.create_list(list1)
     print("list 1 data is:")
     Node.display(first_list)
-    list2 = input("Enter phone number to add:")
+    list2 = input("Enter 2nd phone number to add:")
     second_list = Node.create_list(list2)
     print("list 2 data is")
     Node.display(second_list)
-    print("Reversed List 1")
     first_list = Node.reverse_list(first_list)
-    Node.display(first_list)
-    print("Reversed List 2")
     second_list = Node.reverse_list(second_list)
-    Node.display(second_list)
-    print("added result of number is ")
+    print("added result of number is :")
     third = Node.add_list(first_list,second_list)
     Node.display(third)
 
